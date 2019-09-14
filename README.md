@@ -1,4 +1,4 @@
-# strange-horizon
+# strange-horizon &middot; ![GitHub](https://img.shields.io/github/license/halogeeni/strange-horizon) [![Build Status](https://travis-ci.org/halogeeni/strange-horizon.svg?branch=master)](https://travis-ci.org/halogeeni/strange-horizon)
 
 API for Strange Horizon record label. Work in progress.
 
