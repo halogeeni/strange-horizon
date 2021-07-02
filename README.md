@@ -3,7 +3,7 @@
 
 API for Strange Horizon record label. Work in progress.
 
-This is also an experiment to work with latest Java goodies:
+This is also an experiment to work with new Java goodies:
 * Java 12
-* Spring Boot 2
+* Spring Boot 2.5
 * JUnit 5
