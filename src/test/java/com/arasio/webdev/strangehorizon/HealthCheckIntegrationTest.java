@@ -1,4 +1,4 @@
-package com.arasio.webdev.strangehorizon.controllers;
+package com.arasio.webdev.strangehorizon;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -9,21 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = HealthCheckController.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
 @AutoConfigureMockMvc
-class HealthCheckControllerTest {
+class HealthCheckTest extends DatabaseIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void returnsOkStatusCode() throws Exception {
-        mockMvc.perform(get("/healthcheck"))
+        mockMvc.perform(get("/actuator/health"))
             .andExpect(status().isOk());
     }
 }
