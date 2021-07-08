@@ -15,7 +15,11 @@ public class ArtistService {
 
     public List<ArtistDTO> getArtists() {
         return artistRepository.getArtists().stream()
-            .map(artistEntity -> new ArtistDTO(artistEntity.getName(), artistEntity.getDescription()))
+            .map(ArtistDTO::new)
             .collect(Collectors.toList());
+    }
+
+    public ArtistDTO getArtist(int id) {
+        return new ArtistDTO(artistRepository.getById(id));
     }
 }
