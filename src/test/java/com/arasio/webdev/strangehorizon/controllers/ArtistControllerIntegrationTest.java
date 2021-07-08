@@ -29,13 +29,31 @@ public class ArtistControllerIntegrationTest extends DatabaseIntegrationTest {
         mockMvc.perform(get("/artists"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.length()").value(4))
+            .andExpect(jsonPath("$[0].id").value(1))
             .andExpect(jsonPath("$[0].name").value("You Can't Keep Me Down"))
             .andExpect(jsonPath("$[0].description").value("Dark Ojamo Hardcore"))
+            .andExpect(jsonPath("$[1].id").value(2))
             .andExpect(jsonPath("$[1].name").value("Vässykät"))
             .andExpect(jsonPath("$[1].description").value("Melodic Punk Rock"))
+            .andExpect(jsonPath("$[2].id").value(3))
             .andExpect(jsonPath("$[2].name").value("Vile Fate"))
             .andExpect(jsonPath("$[2].description").value("TKU-LOHJA 4 LIFE!"))
+            .andExpect(jsonPath("$[3].id").value(4))
             .andExpect(jsonPath("$[3].name").value("Born To Cry"))
             .andExpect(jsonPath("$[3].description").value("Doom Hardcore"));
+    }
+
+    @Test
+    public void testGetArtistById() throws Exception {
+        mockMvc.perform(get("/artists/1"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(1))
+            .andExpect(jsonPath("$.name").value("You Can't Keep Me Down"))
+            .andExpect(jsonPath("$.description").value("Dark Ojamo Hardcore"));
+    }
+
+    @Test
+    public void testGetArtistById_shouldReturn404IfNotFound() throws Exception {
+        mockMvc.perform(get("/artists/999")).andExpect(status().is(404));
     }
 }
