@@ -83,3 +83,5 @@ Temporary Items
 log/
 target/
 
+# dotenv file is not committed and template is provided instead
+.env
