@@ -12,6 +12,7 @@ public abstract class DatabaseIntegrationTest {
         DBConfigurationBuilder config = DBConfigurationBuilder.newBuilder();
         config.setPort(0);
         config.setSecurityDisabled(false);
+        config.addArg("--user=root");
         DB db = DB.newEmbeddedDB(config.build());
         db.start();
         db.source("db_init.sql", "root", null, null);
