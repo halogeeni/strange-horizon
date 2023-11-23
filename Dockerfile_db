@@ -1,4 +1,0 @@
-FROM mariadb:10.6.4-focal
-
-COPY src/main/resources/db_init.sql /docker-entrypoint-initdb.d
-COPY src/main/resources/insert_test_data.sql /docker-entrypoint-initdb.d
