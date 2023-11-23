@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: StrangeHorizonAPI
+  datasource:
+    url: jdbc:postgresql://localhost:5432/strange_horizon
+    username: api_read
+    password: api_read_pass
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 9000

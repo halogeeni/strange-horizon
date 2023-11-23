@@ -1,28 +1,28 @@
+version: "3.8"
+
 services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile_api
     ports:
       - "9000:9000"
     depends_on:
       db:
         condition: service_healthy
     environment:
-      - spring.datasource.url=jdbc:mariadb://db:3306/strange_horizon
-    healthcheck:
-      test: curl --fail "http://localhost:9000/actuator/health"
-      timeout: 5s
-      retries: 10
+      - spring.datasource.url=jdbc:postgresql://db:5432/strange_horizon
   db:
-    build:
-      context: .
-      dockerfile: Dockerfile_db
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=strange_horizon
     ports:
-      - "3306:3306"
-    env_file:
-      - .env
+      - "5432:5432"
+    volumes:
+      - ./scripts/create_api_user.sh:/docker-entrypoint-initdb.d/create_api_user.sh
     healthcheck:
-      test: mysql --protocol TCP --user root -p"$$MYSQL_ROOT_PASSWORD" --execute "SELECT 1;"
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
       timeout: 5s
-      retries: 10
+      retries: 5
